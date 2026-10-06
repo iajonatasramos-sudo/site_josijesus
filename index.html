@@ -376,8 +376,13 @@
     .field input::placeholder { color: var(--taupe-soft); }
     .field input:focus, .field select:focus { outline: none; border-color: var(--gold-deep); }
     .field select { appearance: none; cursor: pointer; }
-    form .btn { grid-column: 1 / -1; justify-content: center; margin-top: 0.6rem; }
-    .form-note { grid-column: 1/-1; font-size: 0.72rem; color: var(--taupe); letter-spacing: 0.02em; text-align: center; }
+    .invite__cta {
+      display: flex; flex-direction: column; gap: 1.4rem; align-items: flex-start;
+      padding: clamp(2rem, 4vw, 3rem); border: 1px solid var(--line); background: var(--bone);
+    }
+    .invite__cta p { font-family: var(--serif); font-size: clamp(1.25rem, 2.2vw, 1.55rem); line-height: 1.45; color: var(--ink-soft); max-width: 30ch; }
+    .invite__cta .btn { gap: 0.8em; }
+    .invite__hint { font-size: 0.72rem; color: var(--taupe); letter-spacing: 0.02em; }
 
     @media (max-width: 780px) {
       .invite { grid-template-columns: 1fr; }
@@ -494,7 +499,7 @@
             <div class="title">Levante e tome posse</div>
             <div class="book__price">R$ 60<small>,00</small></div>
           </div>
-          <a href="checkout.html?item=levante" class="btn btn--gold">Adquirir Livro</a>
+          <a href="#" class="btn btn--gold wa-link" data-msg="Olá, eu gostaria de adquirir o livro *Levante e tome posse*." target="_blank" rel="noopener">Adquirir Livro</a>
         </article>
 
         <!-- Livro 2 -->
@@ -508,7 +513,7 @@
             <div class="title">Desperte a Ester dentro de você</div>
             <div class="book__price">R$ 50<small>,00</small></div>
           </div>
-          <a href="checkout.html?item=ester" class="btn btn--gold">Adquirir Livro</a>
+          <a href="#" class="btn btn--gold wa-link" data-msg="Olá, eu gostaria de adquirir o livro *Desperte a Ester dentro de você*." target="_blank" rel="noopener">Adquirir Livro</a>
         </article>
       </div>
 
@@ -566,43 +571,31 @@
             <span class="val">R$ 25,00</span>
             <span class="lab">por convite · vagas limitadas</span>
           </div>
-          <a href="checkout.html?item=convite" class="btn btn--gold" style="align-self:flex-start;">Garantir meu convite</a>
+          <a href="#" class="btn btn--gold wa-link" data-msg="Olá, eu gostaria de garantir meu convite para a Palestra Outubro Rosa." target="_blank" rel="noopener" style="align-self:flex-start;">Garantir meu convite</a>
         </div>
       </div>
 
-      <!-- Formulário de convite -->
+      <!-- Convite para igrejas -->
       <div class="invite" id="convite">
         <div class="invite__intro">
           <span class="eyebrow reveal">Convites para Igrejas</span>
           <h3 class="reveal">Convide Josineia para o seu <em>evento</em></h3>
           <p class="reveal">Uma área dedicada a igrejas e organizadores que desejam solicitar
-            agenda. Preencha os campos e retornaremos com disponibilidade e detalhes.</p>
+            agenda. Toque no botão e fale direto com a equipe pelo WhatsApp.</p>
           <div class="contact reveal">
             <span>Atendimento direto</span>
             <a href="#" id="wa-direct">WhatsApp para agendamentos</a>
           </div>
         </div>
 
-        <form id="invite-form" class="reveal" novalidate>
-          <div class="field">
-            <label for="nome">Nome do Responsável</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
-          </div>
-          <div class="field">
-            <label for="igreja">Igreja / Evento</label>
-            <input type="text" id="igreja" name="igreja" placeholder="Nome da igreja ou evento" required />
-          </div>
-          <div class="field">
-            <label for="data">Data Desejada</label>
-            <input type="date" id="data" name="data" required />
-          </div>
-          <div class="field">
-            <label for="whatsapp">WhatsApp</label>
-            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required />
-          </div>
-          <button type="submit" class="btn btn--gold">Enviar solicitação</button>
-          <p class="form-note">Ao enviar, você será direcionado ao WhatsApp com sua mensagem pronta.</p>
-        </form>
+        <div class="invite__cta reveal">
+          <p>Fale direto com a equipe pelo WhatsApp. A mensagem já vai pronta, é só enviar.</p>
+          <a href="#" class="btn btn--gold wa-link" data-msg="Olá equipe da Ministra Josi Jesus, eu gostaria de convidar a Ministra para um evento na minha igreja." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24s-3.7 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.74 2.65 4.21 3.72.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+            Convidar pelo WhatsApp
+          </a>
+          <span class="invite__hint">Responderemos com disponibilidade e detalhes da agenda.</span>
+        </div>
       </div>
     </div>
   </section>
@@ -648,33 +641,10 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
 
-    /* ---- WhatsApp direct link ---- */
-    document.getElementById('wa-direct').href =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent('Olá! Gostaria de falar sobre agendamentos com a Josineia.');
-
-    /* ---- Formulário de convite -> WhatsApp ---- */
-    document.getElementById('invite-form').addEventListener('submit', function (ev) {
-      ev.preventDefault();
-      const nome = document.getElementById('nome').value.trim();
-      const igreja = document.getElementById('igreja').value.trim();
-      const data = document.getElementById('data').value;
-      const whats = document.getElementById('whatsapp').value.trim();
-
-      if (!nome || !igreja || !data || !whats) {
-        this.reportValidity();
-        return;
-      }
-
-      const dataFmt = data ? new Date(data + 'T00:00:00').toLocaleDateString('pt-BR') : '';
-      const msg =
-        `*Solicitação de Agenda — Josineia Jesus*%0A%0A` +
-        `*Responsável:* ${nome}%0A` +
-        `*Igreja / Evento:* ${igreja}%0A` +
-        `*Data desejada:* ${dataFmt}%0A` +
-        `*WhatsApp:* ${whats}`;
-
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
-    });
+    /* ---- Links de WhatsApp (todos os botões com .wa-link) ---- */
+    const waUrl = (msg) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    document.getElementById('wa-direct').href = waUrl('Olá! Gostaria de falar sobre agendamentos com a Josineia.');
+    document.querySelectorAll('.wa-link').forEach((a) => { a.href = waUrl(a.dataset.msg); });
   </script>
 </body>
 </html>
