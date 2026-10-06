@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Josineia Jesus — Palestrante, Ministra da Palavra & Psicanalista</title>
+  <meta name="description" content="Josineia Jesus — Palestrante, Ministra da Palavra, Psicanalista Clínica e Escritora. Transformando vidas através da Palavra e do cuidado emocional." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Josineia Jesus — Palestrante & Ministra da Palavra" />
+  <meta property="og:description" content="Transformando vidas através da Palavra e do cuidado emocional." />
+  <meta property="og:image" content="assets/img/hero.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bone:        #F5F2EC;
+      --bone-deep:   #EDE8DF;
+      --sand:        #E3DCD0;
+      --taupe:       #9A9184;
+      --taupe-soft:  #B3AB9E;
+      --ink:         #2A2621;
+      --ink-soft:    #4A443C;
+      --noir:        #1B1916;
+      --gold:        #A98A5F;
+      --gold-deep:   #8F7149;
+      --line:        rgba(42, 38, 33, 0.14);
+      --line-soft:   rgba(42, 38, 33, 0.08);
+
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans:  "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      --pad: clamp(1.5rem, 5vw, 6rem);
+      --maxw: 1240px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bone);
+      color: var(--ink);
+      line-height: 1.7;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.1; }
+
+    img { display: block; max-width: 100%; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6em;
+      font-family: var(--sans);
+      font-size: 0.74rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 1.05rem 2.2rem;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--bone);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn:hover { background: transparent; color: var(--ink); }
+
+    .btn--ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn--ghost:hover { background: var(--ink); color: var(--bone); }
+
+    .btn--gold { background: var(--gold-deep); border-color: var(--gold-deep); color: var(--bone); }
+    .btn--gold:hover { background: transparent; color: var(--gold-deep); }
+
+    .btn--light { border-color: rgba(245,242,236,0.5); background: transparent; color: var(--bone); }
+    .btn--light:hover { background: var(--bone); color: var(--noir); border-color: var(--bone); }
+
+    /* ---------- Nav ---------- */
+    header.nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem var(--pad);
+      transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+    }
+    header.nav.scrolled {
+      background: rgba(245, 242, 236, 0.9);
+      backdrop-filter: blur(12px);
+      padding-top: 1rem; padding-bottom: 1rem;
+      box-shadow: 0 1px 0 var(--line-soft);
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      letter-spacing: 0.02em;
+      color: var(--bone);
+      transition: color 0.4s ease;
+    }
+    header.nav.scrolled .brand { color: var(--ink); }
+    .brand span { font-style: italic; }
+
+    .nav-links { display: flex; gap: 2.4rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--bone); opacity: 0.85; transition: color 0.4s ease, opacity 0.3s ease;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px;
+      background: currentColor; transition: width 0.35s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    header.nav.scrolled .nav-links a { color: var(--ink-soft); opacity: 1; }
+    .nav-toggle { display: none; }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: stretch;
+      background: var(--noir);
+    }
+    .hero__content {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem var(--pad) 4rem;
+      color: var(--bone);
+    }
+    .hero__eyebrow { color: var(--gold); margin-bottom: 2rem; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 5.6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.8rem;
+      color: var(--bone);
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero__sub {
+      font-size: 1.02rem;
+      color: var(--taupe-soft);
+      max-width: 30ch;
+      letter-spacing: 0.01em;
+      margin-bottom: 2.8rem;
+      font-weight: 300;
+    }
+    .hero__sub strong { color: var(--bone); font-weight: 400; }
+    .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero__media { position: relative; overflow: hidden; }
+    .hero__media img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+      filter: grayscale(18%) contrast(1.02);
+    }
+    .hero__media::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(27,25,22,0.55) 0%, rgba(27,25,22,0) 42%);
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero__media { min-height: 62vh; order: -1; }
+      .hero__media img { object-position: center 15%; }
+      .hero__content { padding-top: 3rem; padding-bottom: 4.5rem; text-align: left; }
+    }
+
+    /* ---------- Section shells ---------- */
+    section { position: relative; }
+    .section-pad { padding-top: clamp(5rem, 11vw, 9rem); padding-bottom: clamp(5rem, 11vw, 9rem); }
+
+    .section-head { margin-bottom: 3.5rem; }
+    .section-head .eyebrow { display: block; margin-bottom: 1.2rem; }
+    .section-head h2 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); font-weight: 400; letter-spacing: -0.01em; }
+    .section-head h2 em { font-style: italic; color: var(--gold-deep); }
+
+    /* ---------- Sobre ---------- */
+    .sobre { background: var(--bone); }
+    .sobre__grid {
+      display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+    .sobre__media { position: relative; }
+    .sobre__media img {
+      width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 25%;
+      filter: grayscale(12%);
+    }
+    .sobre__media .frame {
+      position: absolute; inset: 18px -18px -18px 18px; border: 1px solid var(--gold);
+      z-index: -1;
+    }
+    .sobre__body p {
+      font-family: var(--serif);
+      font-size: clamp(1.28rem, 2.3vw, 1.68rem);
+      line-height: 1.55;
+      color: var(--ink-soft);
+      font-weight: 300;
+    }
+    .sobre__body p .lead { color: var(--ink); }
+    .sobre__creds {
+      margin-top: 2.6rem; padding-top: 2rem; border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 1.4rem 2.6rem;
+    }
+    .sobre__creds div { }
+    .sobre__creds .k { font-family: var(--serif); font-size: 1.5rem; color: var(--gold-deep); font-style: italic; }
+    .sobre__creds .v { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe); }
+
+    @media (max-width: 780px) {
+      .sobre__grid { grid-template-columns: 1fr; gap: 3rem; }
+      .sobre__media { max-width: 420px; }
+    }
+
+    /* ---------- Livraria ---------- */
+    .livraria { background: var(--noir); color: var(--bone); }
+    .livraria .eyebrow { color: var(--gold); }
+    .livraria .section-head h2 { color: var(--bone); }
+    .livraria .section-head p { color: var(--taupe-soft); font-family: var(--serif); font-size: 1.4rem; font-style: italic; margin-top: 0.8rem; }
+
+    .books { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem); }
+    .book {
+      background: linear-gradient(180deg, #221F1B 0%, #1B1916 100%);
+      border: 1px solid rgba(245,242,236,0.09);
+      padding: clamp(2rem, 4vw, 3rem);
+      display: flex; flex-direction: column; gap: 1.5rem;
+      transition: border-color 0.4s ease, transform 0.4s ease;
+    }
+    .book:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .book__cover {
+      aspect-ratio: 1309 / 2000;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      padding: 2rem 1.6rem;
+      background:
+        radial-gradient(120% 80% at 50% 0%, rgba(169,138,95,0.22), transparent 60%),
+        linear-gradient(155deg, #2E2A24 0%, #201D19 100%);
+      border: 1px solid rgba(169,138,95,0.3);
+      position: relative;
+    }
+    .book__cover::before {
+      content: ""; position: absolute; left: 14px; top: 0; bottom: 0; width: 1px;
+      background: rgba(245,242,236,0.12);
+    }
+    .book__cover .spine-label { position: relative; }
+    .book__cover .brandmark {
+      font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .book__cover h3 { font-size: clamp(1.5rem, 3vw, 2rem); font-style: italic; color: var(--bone); line-height: 1.15; }
+    .book__cover .author {
+      margin-top: 1.4rem; font-family: var(--sans); font-size: 0.62rem;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--taupe-soft);
+    }
+    .book__cover--art { padding: 0; background: #16171F; overflow: hidden; }
+    .book__cover--art::before { display: none; }
+    .book__cover--art img {
+      width: 100%; height: 100%; max-width: 100%;
+      object-fit: cover; display: block;
+    }
+    .book__meta { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+    .book__meta .title { font-family: var(--serif); font-size: 1.35rem; color: var(--bone); }
+    .book__price { font-family: var(--serif); font-size: 1.7rem; color: var(--gold); white-space: nowrap; }
+    .book__price small { font-size: 0.9rem; opacity: 0.7; }
+    .book .btn { width: 100%; justify-content: center; }
+
+    /* Trust / cards */
+    .trust {
+      margin-top: clamp(2.5rem, 5vw, 3.5rem);
+      padding-top: 2.4rem; border-top: 1px solid rgba(245,242,236,0.1);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .trust__text { display: flex; align-items: center; gap: 0.8rem; color: var(--taupe-soft); font-size: 0.82rem; letter-spacing: 0.05em; }
+    .trust__text svg { width: 18px; height: 18px; stroke: var(--gold); }
+    .cards { display: flex; gap: 0.7rem; align-items: center; flex-wrap: wrap; }
+    .card-ico {
+      width: 46px; height: 30px; border-radius: 4px;
+      border: 1px solid rgba(245,242,236,0.18);
+      background: rgba(245,242,236,0.04);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-ico svg { display: block; }
+
+    @media (max-width: 780px) {
+      .books { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- Agenda / Eventos ---------- */
+    .agenda { background: var(--bone-deep); }
+
+    .rosa {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 1px solid var(--line);
+      background: var(--bone);
+      overflow: hidden;
+      margin-bottom: clamp(3rem, 6vw, 4.5rem);
+    }
+    .rosa__media { position: relative; min-height: 340px; overflow: hidden; }
+    .rosa__media img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; filter: grayscale(10%); }
+    .rosa__media::after {
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(27,25,22,0.05), rgba(27,25,22,0.35));
+    }
+    .rosa__tag {
+      position: absolute; top: 1.4rem; left: 1.4rem; z-index: 2;
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      background: rgba(245,242,236,0.92); backdrop-filter: blur(4px);
+      padding: 0.5rem 1rem; font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink);
+    }
+    .rosa__tag .dot { width: 8px; height: 8px; border-radius: 50%; background: #C98AA0; }
+    .rosa__body { padding: clamp(2.2rem, 4.5vw, 3.5rem); display: flex; flex-direction: column; justify-content: center; }
+    .rosa__body .eyebrow { color: #B06E88; margin-bottom: 1.2rem; }
+    .rosa__body h3 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 1.2rem; }
+    .rosa__body h3 em { font-style: italic; color: var(--gold-deep); }
+    .rosa__body p { color: var(--ink-soft); margin-bottom: 1.4rem; max-width: 40ch; }
+    .rosa__price {
+      display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 2rem;
+    }
+    .rosa__price .val { font-family: var(--serif); font-size: 2.4rem; color: var(--ink); }
+    .rosa__price .lab { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); }
+
+    @media (max-width: 780px) {
+      .rosa { grid-template-columns: 1fr; }
+      .rosa__media { min-height: 260px; order: -1; }
+    }
+
+    /* ---------- Form ---------- */
+    .invite {
+      display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(2.5rem, 6vw, 5rem);
+      align-items: start;
+    }
+    .invite__intro .eyebrow { display:block; margin-bottom: 1.2rem; }
+    .invite__intro h3 { font-size: clamp(1.9rem, 4vw, 2.8rem); margin-bottom: 1.4rem; }
+    .invite__intro h3 em { font-style: italic; color: var(--gold-deep); }
+    .invite__intro p { color: var(--ink-soft); max-width: 34ch; }
+    .invite__intro .contact {
+      margin-top: 2.2rem; padding-top: 1.8rem; border-top: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .invite__intro .contact span { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe); }
+    .invite__intro .contact a { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); }
+
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem 1.4rem; }
+    .field { display: flex; flex-direction: column; gap: 0.5rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field label {
+      font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe);
+    }
+    .field input, .field select {
+      font-family: var(--sans); font-size: 0.95rem; font-weight: 300; color: var(--ink);
+      background: transparent;
+      border: none; border-bottom: 1px solid var(--line);
+      padding: 0.7rem 0.1rem; transition: border-color 0.35s ease;
+    }
+    .field input::placeholder { color: var(--taupe-soft); }
+    .field input:focus, .field select:focus { outline: none; border-color: var(--gold-deep); }
+    .field select { appearance: none; cursor: pointer; }
+    form .btn { grid-column: 1 / -1; justify-content: center; margin-top: 0.6rem; }
+    .form-note { grid-column: 1/-1; font-size: 0.72rem; color: var(--taupe); letter-spacing: 0.02em; text-align: center; }
+
+    @media (max-width: 780px) {
+      .invite { grid-template-columns: 1fr; }
+      form { grid-template-columns: 1fr; }
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--noir); color: var(--taupe-soft);
+      padding: clamp(3.5rem, 7vw, 5rem) 0 2.5rem;
+    }
+    .footer__top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+    .footer__brand { font-family: var(--serif); font-size: 1.8rem; color: var(--bone); }
+    .footer__brand span { font-style: italic; color: var(--gold); }
+    .footer__tag { margin-top: 0.6rem; font-size: 0.8rem; max-width: 32ch; }
+    .footer__nav { display: flex; gap: 2.2rem; flex-wrap: wrap; }
+    .footer__nav a { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; transition: color 0.3s; }
+    .footer__nav a:hover { color: var(--gold); }
+    .footer__bottom {
+      margin-top: clamp(2.5rem, 5vw, 3.5rem); padding-top: 1.8rem;
+      border-top: 1px solid rgba(245,242,236,0.1);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.7rem; letter-spacing: 0.06em; color: var(--taupe);
+    }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s cubic-bezier(0.22,1,0.36,1), transform 1s cubic-bezier(0.22,1,0.36,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <header class="nav" id="nav">
+    <a href="#inicio" class="brand">Josineia <span>Jesus</span></a>
+    <nav class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#livraria">Livraria</a>
+      <a href="#agenda">Agenda</a>
+      <a href="#convite">Convite</a>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero__content">
+      <span class="eyebrow hero__eyebrow reveal">Fé · Palavra · Cuidado Emocional</span>
+      <h1 class="reveal">Transformando vidas através da <em>Palavra</em> e do cuidado emocional.</h1>
+      <p class="hero__sub reveal">
+        <strong>Josineia Jesus</strong> — Palestrante, Ministra da Palavra,
+        Psicanalista Clínica e Escritora.
+      </p>
+      <div class="hero__actions reveal">
+        <a href="#livraria" class="btn btn--light">Conhecer Livros</a>
+        <a href="#convite" class="btn btn--light">Agendar Convite</a>
+      </div>
+    </div>
+    <div class="hero__media">
+      <img src="assets/img/hero.jpg" alt="Josineia Jesus" />
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE ===================== -->
+  <section class="sobre section-pad" id="sobre">
+    <div class="wrap">
+      <div class="sobre__grid">
+        <div class="sobre__media reveal">
+          <div class="frame"></div>
+          <img src="assets/img/sobre.jpg" alt="Retrato de Josineia Jesus" />
+        </div>
+        <div class="sobre__body">
+          <span class="eyebrow reveal" style="display:block;margin-bottom:1.4rem;">Sobre Josineia</span>
+          <p class="reveal">
+            <span class="lead">Com uma trajetória marcada pela fé,</span> Josineia Jesus dedica sua
+            vida a edificar pessoas. Como Ministra da Palavra e preletora, leva mensagens
+            transformadoras a festividades e grandes eventos, como a Sede de Madureira, com a
+            certeza de que o Senhor nunca a despede de mãos vazias. Como Psicanalista Clínica,
+            une o acolhimento espiritual ao cuidado emocional profundo.
+          </p>
+          <div class="sobre__creds reveal">
+            <div><div class="k">Ministra</div><div class="v">da Palavra</div></div>
+            <div><div class="k">Palestrante</div><div class="v">& Preletora</div></div>
+            <div><div class="k">Psicanalista</div><div class="v">Clínica</div></div>
+            <div><div class="k">Escritora</div><div class="v">Autora</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LIVRARIA ===================== -->
+  <section class="livraria section-pad" id="livraria">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Livraria da Autora</span>
+        <h2>Palavras que <em>edificam</em></h2>
+        <p>Obras escritas para fortalecer sua fé e identidade.</p>
+      </div>
+
+      <div class="books">
+        <!-- Livro 1 -->
+        <article class="book reveal">
+          <div class="book__cover book__cover--art">
+            <img src="Livros/Capa/Capa_livro_levante_e_tome_posse.png"
+                 alt="Capa do livro Levante e Tome Posse, de Josineia Jesus"
+                 width="1309" height="2000" loading="lazy" />
+          </div>
+          <div class="book__meta">
+            <div class="title">Levante e tome posse</div>
+            <div class="book__price">R$ 60<small>,00</small></div>
+          </div>
+          <a href="checkout.html?item=levante" class="btn btn--gold">Adquirir Livro</a>
+        </article>
+
+        <!-- Livro 2 -->
+        <article class="book reveal">
+          <div class="book__cover book__cover--art">
+            <img src="Livros/Capa/Capa_livro_desperto_a_ester.png"
+                 alt="Capa do livro Desperte a &ldquo;Ester&rdquo; Dentro de Você, de Josineia Jesus"
+                 width="1309" height="2000" loading="lazy" />
+          </div>
+          <div class="book__meta">
+            <div class="title">Desperte a Ester dentro de você</div>
+            <div class="book__price">R$ 50<small>,00</small></div>
+          </div>
+          <a href="checkout.html?item=ester" class="btn btn--gold">Adquirir Livro</a>
+        </article>
+      </div>
+
+      <!-- Trust -->
+      <div class="trust reveal">
+        <div class="trust__text">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          <span>Aceitamos todos os cartões de crédito · pagamento seguro</span>
+        </div>
+        <div class="cards" aria-label="Bandeiras de cartão aceitas">
+          <!-- Visa -->
+          <div class="card-ico" title="Visa">
+            <svg width="30" height="12" viewBox="0 0 30 12"><text x="0" y="10" font-family="Jost, sans-serif" font-size="10" font-weight="500" letter-spacing="0.5" fill="#E9E4DA">VISA</text></svg>
+          </div>
+          <!-- Mastercard -->
+          <div class="card-ico" title="Mastercard">
+            <svg width="34" height="20" viewBox="0 0 34 20"><circle cx="13" cy="10" r="7" fill="#C98A5E" opacity="0.9"/><circle cx="21" cy="10" r="7" fill="#E9E4DA" opacity="0.55"/></svg>
+          </div>
+          <!-- Amex -->
+          <div class="card-ico" title="American Express">
+            <svg width="30" height="12" viewBox="0 0 30 12"><text x="0" y="10" font-family="Jost, sans-serif" font-size="7.5" font-weight="500" letter-spacing="0.3" fill="#E9E4DA">AMEX</text></svg>
+          </div>
+          <!-- Elo -->
+          <div class="card-ico" title="Elo">
+            <svg width="26" height="12" viewBox="0 0 26 12"><text x="0" y="10" font-family="Jost, sans-serif" font-size="9" font-weight="500" letter-spacing="0.5" fill="#E9E4DA">elo</text></svg>
+          </div>
+          <!-- Hipercard -->
+          <div class="card-ico" title="Hipercard">
+            <svg width="40" height="12" viewBox="0 0 40 12"><text x="0" y="10" font-family="Jost, sans-serif" font-size="6.5" font-weight="500" letter-spacing="0.2" fill="#E9E4DA">HIPERCARD</text></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AGENDA / EVENTOS ===================== -->
+  <section class="agenda section-pad" id="agenda">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Agenda & Eventos Especiais</span>
+        <h2>Momentos de <em>encontro</em></h2>
+      </div>
+
+      <!-- Outubro Rosa -->
+      <div class="rosa reveal">
+        <div class="rosa__media">
+          <span class="rosa__tag"><span class="dot"></span>Outubro Rosa</span>
+          <img src="assets/img/palestra.jpg" alt="Josineia Jesus palestrando" />
+        </div>
+        <div class="rosa__body">
+          <span class="eyebrow">Evento Especial</span>
+          <h3>Palestra <em>Outubro Rosa</em></h3>
+          <p>Garanta sua presença no nosso evento especial de Outubro Rosa. Convites limitados.</p>
+          <div class="rosa__price">
+            <span class="val">R$ 25,00</span>
+            <span class="lab">por convite · vagas limitadas</span>
+          </div>
+          <a href="checkout.html?item=convite" class="btn btn--gold" style="align-self:flex-start;">Garantir meu convite</a>
+        </div>
+      </div>
+
+      <!-- Formulário de convite -->
+      <div class="invite" id="convite">
+        <div class="invite__intro">
+          <span class="eyebrow reveal">Convites para Igrejas</span>
+          <h3 class="reveal">Convide Josineia para o seu <em>evento</em></h3>
+          <p class="reveal">Uma área dedicada a igrejas e organizadores que desejam solicitar
+            agenda. Preencha os campos e retornaremos com disponibilidade e detalhes.</p>
+          <div class="contact reveal">
+            <span>Atendimento direto</span>
+            <a href="#" id="wa-direct">WhatsApp para agendamentos</a>
+          </div>
+        </div>
+
+        <form id="invite-form" class="reveal" novalidate>
+          <div class="field">
+            <label for="nome">Nome do Responsável</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
+          </div>
+          <div class="field">
+            <label for="igreja">Igreja / Evento</label>
+            <input type="text" id="igreja" name="igreja" placeholder="Nome da igreja ou evento" required />
+          </div>
+          <div class="field">
+            <label for="data">Data Desejada</label>
+            <input type="date" id="data" name="data" required />
+          </div>
+          <div class="field">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required />
+          </div>
+          <button type="submit" class="btn btn--gold">Enviar solicitação</button>
+          <p class="form-note">Ao enviar, você será direcionado ao WhatsApp com sua mensagem pronta.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="wrap">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand">Josineia <span>Jesus</span></div>
+          <p class="footer__tag">Palestrante, Ministra da Palavra, Psicanalista Clínica e Escritora — edificando vidas através da fé e do cuidado emocional.</p>
+        </div>
+        <nav class="footer__nav">
+          <a href="#sobre">Sobre</a>
+          <a href="#livraria">Livraria</a>
+          <a href="#agenda">Agenda</a>
+          <a href="#convite">Convite</a>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> Josineia Jesus. Todos os direitos reservados.</span>
+        <span>Feito com fé e propósito.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ---- Configuração: número de WhatsApp (formato internacional, só dígitos) ---- */
+    const WHATSAPP_NUMBER = "5511980996671"; // WhatsApp para agendamentos e vendas
+
+    /* ---- Ano no rodapé ---- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ---- Nav scroll state ---- */
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ---- Reveal on scroll ---- */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    /* ---- WhatsApp direct link ---- */
+    document.getElementById('wa-direct').href =
+      `https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent('Olá! Gostaria de falar sobre agendamentos com a Josineia.');
+
+    /* ---- Formulário de convite -> WhatsApp ---- */
+    document.getElementById('invite-form').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      const nome = document.getElementById('nome').value.trim();
+      const igreja = document.getElementById('igreja').value.trim();
+      const data = document.getElementById('data').value;
+      const whats = document.getElementById('whatsapp').value.trim();
+
+      if (!nome || !igreja || !data || !whats) {
+        this.reportValidity();
+        return;
+      }
+
+      const dataFmt = data ? new Date(data + 'T00:00:00').toLocaleDateString('pt-BR') : '';
+      const msg =
+        `*Solicitação de Agenda — Josineia Jesus*%0A%0A` +
+        `*Responsável:* ${nome}%0A` +
+        `*Igreja / Evento:* ${igreja}%0A` +
+        `*Data desejada:* ${dataFmt}%0A` +
+        `*WhatsApp:* ${whats}`;
+
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
+    });
+  </script>
+</body>
+</html>

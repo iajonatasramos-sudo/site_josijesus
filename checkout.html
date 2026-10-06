@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Josineia Jesus</title>
+  <meta name="description" content="Finalize a compra dos livros e convites de Josineia Jesus." />
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bone:        #F5F2EC;
+      --bone-deep:   #EDE8DF;
+      --sand:        #E3DCD0;
+      --taupe:       #9A9184;
+      --taupe-soft:  #B3AB9E;
+      --ink:         #2A2621;
+      --ink-soft:    #4A443C;
+      --noir:        #1B1916;
+      --gold:        #A98A5F;
+      --gold-deep:   #8F7149;
+      --line:        rgba(42, 38, 33, 0.14);
+      --line-soft:   rgba(42, 38, 33, 0.08);
+      --error:       #A5473F;
+
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans:  "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      --pad: clamp(1.25rem, 5vw, 6rem);
+      --maxw: 1240px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bone);
+      color: var(--ink);
+      line-height: 1.7;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.1; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 400; letter-spacing: 0.38em;
+      text-transform: uppercase; color: var(--gold-deep);
+    }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); width: 100%; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+      font-size: 0.74rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 1.05rem 2.2rem;
+      border: 1px solid var(--ink); background: var(--ink); color: var(--bone);
+      cursor: pointer; transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn:hover { background: transparent; color: var(--ink); }
+    .btn--gold { background: var(--gold-deep); border-color: var(--gold-deep); color: var(--bone); }
+    .btn--gold:hover { background: transparent; color: var(--gold-deep); }
+    .btn--ghost { background: transparent; color: var(--ink); }
+    .btn--ghost:hover { background: var(--ink); color: var(--bone); }
+    .btn--light { border-color: rgba(245,242,236,0.5); background: transparent; color: var(--bone); }
+    .btn--light:hover { background: var(--bone); color: var(--noir); border-color: var(--bone); }
+    .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+    .btn[disabled]:hover { background: var(--gold-deep); color: var(--bone); }
+
+    /* ---------- Nav ---------- */
+    header.nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem var(--pad);
+      border-bottom: 1px solid var(--line-soft);
+      background: var(--bone);
+    }
+    .brand { font-family: var(--serif); font-size: 1.4rem; letter-spacing: 0.02em; color: var(--ink); }
+    .brand span { font-style: italic; }
+    .nav-back {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-back svg { width: 14px; height: 14px; stroke: currentColor; }
+    .nav-back:hover { color: var(--gold-deep); }
+    .secure {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe);
+    }
+    .secure svg { width: 14px; height: 14px; stroke: var(--gold-deep); }
+    @media (max-width: 640px) { .secure { display: none; } }
+
+    /* ---------- Layout ---------- */
+    main { flex: 1; padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(4rem, 8vw, 7rem); }
+    .page-head { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+    .page-head .eyebrow { display: block; margin-bottom: 1rem; }
+    .page-head h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); letter-spacing: -0.01em; }
+    .page-head h1 em { font-style: italic; color: var(--gold-deep); }
+
+    .checkout {
+      display: grid; grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(2rem, 5vw, 5rem); align-items: start;
+    }
+    @media (max-width: 900px) {
+      .checkout { grid-template-columns: 1fr; }
+      .summary { position: static !important; order: -1; }
+    }
+
+    /* ---------- Steps ---------- */
+    .step { padding: clamp(1.8rem, 3.5vw, 2.6rem) 0; border-top: 1px solid var(--line); }
+    .step:first-child { border-top: none; padding-top: 0; }
+    .step__head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.6rem; }
+    .step__num { font-family: var(--serif); font-style: italic; font-size: 1.6rem; color: var(--gold-deep); min-width: 1.6rem; }
+    .step__head h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); }
+    .step__hint { font-size: 0.82rem; color: var(--taupe); margin: -1rem 0 1.4rem 2.6rem; max-width: 46ch; }
+
+    /* Items */
+    .items { display: flex; flex-direction: column; }
+    .item {
+      display: grid; grid-template-columns: 72px 1fr auto; gap: 1.2rem; align-items: center;
+      padding: 1.1rem 0; border-top: 1px solid var(--line-soft);
+    }
+    .item:first-child { border-top: none; padding-top: 0; }
+    .item__cover {
+      width: 72px; aspect-ratio: 1309 / 2000; overflow: hidden; background: var(--noir);
+      border: 1px solid var(--line);
+    }
+    .item__cover img { width: 100%; height: 100%; object-fit: cover; }
+    .item__cover--ticket {
+      aspect-ratio: 1309 / 2000; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(155deg, #2E2A24 0%, #201D19 100%);
+    }
+    .item__cover--ticket span { font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 0.85rem; text-align: center; line-height: 1.2; padding: 0.4rem; }
+    .item__title { font-family: var(--serif); font-size: 1.3rem; color: var(--ink); line-height: 1.2; }
+    .item__sub { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--taupe); margin-top: 0.3rem; }
+    .item__price { font-family: var(--serif); font-size: 1.15rem; color: var(--gold-deep); margin-top: 0.35rem; }
+    .qty { display: inline-flex; align-items: center; border: 1px solid var(--line); }
+    .qty button {
+      width: 36px; height: 36px; background: transparent; border: none; cursor: pointer;
+      color: var(--ink); font-size: 1.1rem; transition: background 0.3s;
+    }
+    .qty button:hover { background: var(--bone-deep); }
+    .qty output { min-width: 36px; text-align: center; font-size: 0.95rem; font-weight: 400; }
+    .item--off { opacity: 0.45; }
+    .item--off .qty button.minus { visibility: hidden; }
+    @media (max-width: 520px) {
+      .item { grid-template-columns: 56px 1fr; }
+      .item__cover { width: 56px; }
+      .item .qty { grid-column: 2; justify-self: start; }
+    }
+
+    /* Form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 1.4rem; }
+    .field { display: flex; flex-direction: column; gap: 0.45rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field.third { grid-column: span 1; }
+    .field label { font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); }
+    .field label .opt { letter-spacing: 0.05em; text-transform: none; opacity: 0.8; }
+    .field input, .field select {
+      font-family: var(--sans); font-size: 0.95rem; font-weight: 300; color: var(--ink);
+      background: transparent; border: none; border-bottom: 1px solid var(--line);
+      padding: 0.7rem 0.1rem; transition: border-color 0.35s ease; border-radius: 0;
+    }
+    .field input::placeholder { color: var(--taupe-soft); }
+    .field input:focus, .field select:focus { outline: none; border-color: var(--gold-deep); }
+    .field select { appearance: none; cursor: pointer; }
+    .field.invalid input, .field.invalid select { border-color: var(--error); }
+    .field .msg { font-size: 0.7rem; color: var(--error); min-height: 1em; display: none; }
+    .field.invalid .msg { display: block; }
+    .form-grid.addr { grid-template-columns: repeat(6, 1fr); }
+    .addr .f-cep { grid-column: span 2; }
+    .addr .f-rua { grid-column: span 4; }
+    .addr .f-num { grid-column: span 2; }
+    .addr .f-comp { grid-column: span 4; }
+    .addr .f-bairro { grid-column: span 3; }
+    .addr .f-cidade { grid-column: span 2; }
+    .addr .f-uf { grid-column: span 1; }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-grid.addr { grid-template-columns: 1fr 1fr; }
+      .addr .f-cep, .addr .f-num, .addr .f-cidade { grid-column: span 1; }
+      .addr .f-rua, .addr .f-comp, .addr .f-bairro { grid-column: span 2; }
+      .addr .f-uf { grid-column: span 1; }
+    }
+
+    /* Choice cards (frete / pagamento) */
+    .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 640px) { .choices { grid-template-columns: 1fr; } }
+    .choice { position: relative; }
+    .choice input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+    .choice__box {
+      border: 1px solid var(--line); padding: 1.2rem 1.3rem; height: 100%;
+      display: flex; flex-direction: column; gap: 0.3rem;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .choice input:checked + .choice__box { border-color: var(--gold-deep); background: rgba(169,138,95,0.07); }
+    .choice input:focus-visible + .choice__box { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .choice__title { font-family: var(--serif); font-size: 1.25rem; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+    .choice__title .tag { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); white-space: nowrap; }
+    .choice__desc { font-size: 0.8rem; color: var(--taupe); line-height: 1.5; }
+
+    .pay-note {
+      margin-top: 1.4rem; padding: 1.1rem 1.3rem; border-left: 2px solid var(--gold);
+      background: var(--bone-deep); font-size: 0.85rem; color: var(--ink-soft);
+    }
+    .pay-note strong { font-weight: 400; color: var(--ink); }
+
+    /* ---------- Summary ---------- */
+    .summary {
+      position: sticky; top: 1.5rem;
+      background: linear-gradient(180deg, #221F1B 0%, #1B1916 100%);
+      border: 1px solid rgba(245,242,236,0.09);
+      color: var(--bone); padding: clamp(1.6rem, 3vw, 2.4rem);
+    }
+    .summary .eyebrow { color: var(--gold); display: block; margin-bottom: 1.2rem; }
+    .summary__lines { display: flex; flex-direction: column; gap: 0.7rem; padding-bottom: 1.2rem; border-bottom: 1px solid rgba(245,242,236,0.1); }
+    .sline { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.9rem; color: var(--taupe-soft); }
+    .sline b { font-weight: 400; color: var(--bone); }
+    .sline .v { white-space: nowrap; font-family: var(--serif); font-size: 1.05rem; color: var(--bone); }
+    .summary__empty { color: var(--taupe-soft); font-family: var(--serif); font-style: italic; font-size: 1.15rem; }
+    .totals { padding: 1.2rem 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .totals .sline .v { font-size: 1rem; }
+    .total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 1rem; border-top: 1px solid rgba(245,242,236,0.1); }
+    .total .k { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--taupe-soft); }
+    .total .v { font-family: var(--serif); font-size: 2.2rem; color: var(--gold); }
+    .total .v small { font-size: 1rem; opacity: 0.7; }
+    .summary .btn { width: 100%; margin-top: 1.4rem; }
+    .summary__foot { margin-top: 1.1rem; font-size: 0.72rem; color: var(--taupe); text-align: center; line-height: 1.5; }
+    .summary__foot svg { width: 12px; height: 12px; stroke: var(--gold); vertical-align: -2px; margin-right: 4px; }
+
+    /* ---------- Confirmation ---------- */
+    .done { display: none; }
+    body.is-done .checkout { display: none; }
+    body.is-done .done { display: block; }
+    .done__panel {
+      max-width: 720px; margin: 0 auto; text-align: center;
+      padding: clamp(2rem, 5vw, 3.5rem); border: 1px solid var(--line); background: #fff;
+    }
+    .done__check { width: 56px; height: 56px; margin: 0 auto 1.4rem; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .done__check svg { width: 24px; height: 24px; stroke: var(--gold-deep); }
+    .done h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 0.6rem; }
+    .done h2 em { font-style: italic; color: var(--gold-deep); }
+    .done .order-id { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--taupe); margin-bottom: 1.4rem; }
+    .done p { color: var(--ink-soft); max-width: 48ch; margin: 0 auto 1rem; }
+    .pix-box { margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid var(--line); }
+    .pix-box .qr { width: 200px; height: 200px; margin: 0 auto 1.2rem; background: #fff; padding: 8px; border: 1px solid var(--line); }
+    .pix-box .qr img, .pix-box .qr canvas { width: 100% !important; height: 100% !important; }
+    .pix-code {
+      display: flex; gap: 0.5rem; max-width: 520px; margin: 0 auto;
+    }
+    .pix-code input {
+      flex: 1; min-width: 0; font-family: ui-monospace, Menlo, monospace; font-size: 0.72rem;
+      padding: 0.75rem 0.8rem; border: 1px solid var(--line); background: var(--bone); color: var(--ink-soft);
+    }
+    .pix-code .btn { padding: 0.75rem 1.2rem; }
+    .done__actions { margin-top: 2rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--noir); color: var(--taupe); padding: 2rem 0;
+      font-size: 0.7rem; letter-spacing: 0.06em;
+    }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    footer a:hover { color: var(--gold); }
+
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <a href="index.html#livraria" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Voltar à livraria
+    </a>
+    <a href="index.html" class="brand">Josineia <span>Jesus</span></a>
+    <span class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Pedido seguro
+    </span>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="page-head">
+        <span class="eyebrow">Livraria da Autora</span>
+        <h1>Finalizar <em>pedido</em></h1>
+      </div>
+
+      <form class="checkout" id="checkout" novalidate>
+        <div class="steps">
+
+          <!-- 1. Itens -->
+          <section class="step">
+            <div class="step__head"><span class="step__num">01</span><h2>Seus itens</h2></div>
+            <div class="items" id="items"></div>
+          </section>
+
+          <!-- 2. Dados -->
+          <section class="step">
+            <div class="step__head"><span class="step__num">02</span><h2>Seus dados</h2></div>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Como devemos te chamar" autocomplete="name" required />
+                <span class="msg">Informe seu nome completo.</span>
+              </div>
+              <div class="field">
+                <label for="whatsapp">WhatsApp</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" autocomplete="tel" inputmode="tel" required />
+                <span class="msg">Informe um número com DDD.</span>
+              </div>
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required />
+                <span class="msg">Informe um e-mail válido.</span>
+              </div>
+              <div class="field">
+                <label for="cpf">CPF <span class="opt">(opcional, para nota)</span></label>
+                <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" inputmode="numeric" />
+                <span class="msg">CPF inválido.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. Entrega -->
+          <section class="step" id="step-entrega">
+            <div class="step__head"><span class="step__num">03</span><h2>Entrega</h2></div>
+            <div class="choices" id="frete-choices" style="margin-bottom:1.8rem;"></div>
+            <div id="addr-block">
+              <div class="form-grid addr">
+                <div class="field f-cep">
+                  <label for="cep">CEP</label>
+                  <input type="text" id="cep" name="cep" placeholder="00000-000" inputmode="numeric" autocomplete="postal-code" />
+                  <span class="msg">CEP inválido.</span>
+                </div>
+                <div class="field f-rua">
+                  <label for="rua">Endereço</label>
+                  <input type="text" id="rua" name="rua" placeholder="Rua, avenida…" autocomplete="address-line1" />
+                  <span class="msg">Informe o endereço.</span>
+                </div>
+                <div class="field f-num">
+                  <label for="numero">Número</label>
+                  <input type="text" id="numero" name="numero" placeholder="Nº" />
+                  <span class="msg">Obrigatório.</span>
+                </div>
+                <div class="field f-comp">
+                  <label for="comp">Complemento <span class="opt">(opcional)</span></label>
+                  <input type="text" id="comp" name="comp" placeholder="Apto, bloco, referência" autocomplete="address-line2" />
+                  <span class="msg"></span>
+                </div>
+                <div class="field f-bairro">
+                  <label for="bairro">Bairro</label>
+                  <input type="text" id="bairro" name="bairro" placeholder="Bairro" />
+                  <span class="msg">Informe o bairro.</span>
+                </div>
+                <div class="field f-cidade">
+                  <label for="cidade">Cidade</label>
+                  <input type="text" id="cidade" name="cidade" placeholder="Cidade" autocomplete="address-level2" />
+                  <span class="msg">Informe a cidade.</span>
+                </div>
+                <div class="field f-uf">
+                  <label for="uf">UF</label>
+                  <input type="text" id="uf" name="uf" placeholder="UF" maxlength="2" autocomplete="address-level1" style="text-transform:uppercase" />
+                  <span class="msg">UF</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Pagamento -->
+          <section class="step">
+            <div class="step__head"><span class="step__num">04</span><h2>Pagamento</h2></div>
+            <div class="choices" id="pay-choices"></div>
+            <div class="pay-note" id="pay-note"></div>
+          </section>
+
+        </div>
+
+        <!-- Resumo -->
+        <aside class="summary" id="summary">
+          <span class="eyebrow">Resumo do pedido</span>
+          <div class="summary__lines" id="sum-lines"></div>
+          <div class="totals">
+            <div class="sline"><span>Subtotal</span><span class="v" id="sum-sub">R$ 0,00</span></div>
+            <div class="sline"><span>Frete</span><span class="v" id="sum-frete">—</span></div>
+          </div>
+          <div class="total"><span class="k">Total</span><span class="v" id="sum-total">R$ 0,00</span></div>
+          <button type="submit" class="btn btn--gold" id="submit-btn">Finalizar pedido</button>
+          <p class="summary__foot">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Seu pedido é enviado pelo WhatsApp e confirmado pessoalmente pela equipe da autora.
+          </p>
+        </aside>
+      </form>
+
+      <!-- Confirmação -->
+      <section class="done" id="done">
+        <div class="done__panel">
+          <div class="done__check">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h2>Pedido <em>recebido</em></h2>
+          <div class="order-id" id="done-id"></div>
+          <p id="done-text"></p>
+          <div class="pix-box" id="pix-box" hidden>
+            <span class="eyebrow" style="display:block;margin-bottom:1rem;">Pague com Pix</span>
+            <div class="qr" id="pix-qr"></div>
+            <p style="font-size:0.8rem;">Escaneie o QR Code ou copie o código Pix abaixo.</p>
+            <div class="pix-code">
+              <input type="text" id="pix-payload" readonly />
+              <button type="button" class="btn btn--ghost" id="pix-copy">Copiar</button>
+            </div>
+          </div>
+          <div class="done__actions">
+            <a class="btn btn--gold" id="done-wa" target="_blank" rel="noopener">Abrir WhatsApp</a>
+            <a class="btn btn--ghost" id="done-card" target="_blank" rel="noopener" hidden>Pagar com cartão</a>
+            <a class="btn btn--ghost" href="index.html">Voltar ao site</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="year"></span> Josineia Jesus. Todos os direitos reservados.</span>
+      <a href="index.html">josineiajesus · início</a>
+    </div>
+  </footer>
+
+  <script>
+    /* =====================================================================
+       CONFIGURAÇÃO — preencha aqui. Nada mais precisa ser alterado.
+       ===================================================================== */
+    const CONFIG = {
+      // WhatsApp que recebe os pedidos (formato internacional, só dígitos)
+      whatsapp: "5511980996671",
+
+      // Pix: deixe pixKey vazio ("") para ocultar o QR Code e combinar pelo WhatsApp.
+      pixKey:  "",                 // ex.: "email@dominio.com", "11999999999" ou chave aleatória
+      pixName: "JOSINEIA JESUS",   // até 25 caracteres, sem acentos
+      pixCity: "SAO PAULO",        // até 15 caracteres, sem acentos
+
+      // Catálogo
+      products: [
+        { id: "levante", title: "Levante e tome posse", sub: "Livro · Josineia Jesus", price: 60, cover: "Livros/Capa/Capa_livro_levante_e_tome_posse.png", cardLink: "" },
+        { id: "ester",   title: "Desperte a Ester dentro de você", sub: "Livro · Josineia Jesus", price: 50, cover: "Livros/Capa/Capa_livro_desperto_a_ester.png", cardLink: "" },
+        { id: "convite", title: "Convite · Palestra Outubro Rosa", sub: "Evento · vagas limitadas", price: 25, ticket: true, cardLink: "" }
+      ],
+
+      // Frete: price null = "a combinar" (confirmado no WhatsApp)
+      shipping: [
+        { id: "correios", title: "Correios", tag: "a combinar", desc: "Enviamos para todo o Brasil. O valor do frete é confirmado no WhatsApp antes do pagamento.", price: null },
+        { id: "retirada", title: "Retirada em mãos", tag: "grátis", desc: "Retire com a autora em um evento ou local combinado.", price: 0 }
+      ],
+
+      // Link de pagamento com cartão para o pedido inteiro (ex.: Mercado Pago / Stripe).
+      // Se vazio e o produto também não tiver cardLink, o link é enviado pelo WhatsApp.
+      cardLinkGeneral: ""
+    };
+    /* ===================================================================== */
+
+    const $ = (s, r = document) => r.querySelector(s);
+    const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const digits = (s) => (s || '').replace(/\D/g, '');
+    const STORAGE = 'jj-cart';
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ---- Carrinho ---- */
+    let cart = {};
+    try { cart = JSON.parse(localStorage.getItem(STORAGE) || '{}'); } catch (e) { cart = {}; }
+    const params = new URLSearchParams(location.search);
+    if (params.get('item')) {
+      const id = params.get('item');
+      const q = Math.max(1, parseInt(params.get('qtd') || '1', 10) || 1);
+      if (CONFIG.products.some(p => p.id === id)) cart[id] = Math.max(cart[id] || 0, q);
+      history.replaceState(null, '', location.pathname);
+    }
+    const saveCart = () => { try { localStorage.setItem(STORAGE, JSON.stringify(cart)); } catch (e) {} };
+
+    const cartItems = () => CONFIG.products.filter(p => cart[p.id] > 0).map(p => ({ ...p, qty: cart[p.id] }));
+    const needsShipping = () => cartItems().some(i => !i.ticket);
+
+    function renderItems() {
+      const box = $('#items');
+      box.innerHTML = CONFIG.products.map(p => {
+        const q = cart[p.id] || 0;
+        const cover = p.ticket
+          ? `<div class="item__cover item__cover--ticket"><span>Outubro<br>Rosa</span></div>`
+          : `<div class="item__cover"><img src="${p.cover}" alt="Capa: ${p.title}" loading="lazy" /></div>`;
+        return `
+          <div class="item ${q ? '' : 'item--off'}" data-id="${p.id}">
+            ${cover}
+            <div>
+              <div class="item__title">${p.title}</div>
+              <div class="item__sub">${p.sub}</div>
+              <div class="item__price">${brl(p.price)}${q > 1 ? ` <small style="color:var(--taupe);font-family:var(--sans);font-size:0.72rem;">× ${q} = ${brl(p.price * q)}</small>` : ''}</div>
+            </div>
+            <div class="qty" aria-label="Quantidade de ${p.title}">
+              <button type="button" class="minus" aria-label="Remover um">−</button>
+              <output>${q}</output>
+              <button type="button" class="plus" aria-label="Adicionar um">+</button>
+            </div>
+          </div>`;
+      }).join('');
+    }
+    $('#items').addEventListener('click', (e) => {
+      const btn = e.target.closest('button'); if (!btn) return;
+      const id = btn.closest('.item').dataset.id;
+      cart[id] = Math.max(0, (cart[id] || 0) + (btn.classList.contains('plus') ? 1 : -1));
+      if (!cart[id]) delete cart[id];
+      saveCart(); renderAll();
+    });
+
+    /* ---- Frete ---- */
+    function renderShipping() {
+      const box = $('#frete-choices');
+      const cur = $('input[name=frete]:checked')?.value || CONFIG.shipping[0].id;
+      box.innerHTML = CONFIG.shipping.map(s => `
+        <label class="choice">
+          <input type="radio" name="frete" value="${s.id}" ${s.id === cur ? 'checked' : ''} />
+          <div class="choice__box">
+            <div class="choice__title">${s.title}<span class="tag">${s.tag}</span></div>
+            <div class="choice__desc">${s.desc}</div>
+          </div>
+        </label>`).join('');
+    }
+    $('#frete-choices').addEventListener('change', renderAll);
+    const shipping = () => CONFIG.shipping.find(s => s.id === $('input[name=frete]:checked')?.value) || CONFIG.shipping[0];
+
+    /* ---- Pagamento ---- */
+    const PAY = [
+      { id: 'pix', title: 'Pix', tag: 'à vista', desc: CONFIG.pixKey ? 'QR Code gerado na hora. Envie o comprovante pelo WhatsApp.' : 'Chave Pix enviada pelo WhatsApp após a confirmação do pedido.' },
+      { id: 'cartao', title: 'Cartão de crédito', tag: 'todas as bandeiras', desc: 'Link de pagamento seguro enviado após a confirmação do pedido.' }
+    ];
+    const PAY_NOTES = {
+      pix: `<strong>Como funciona:</strong> ao finalizar, seu pedido é enviado pelo WhatsApp${CONFIG.pixKey ? ' e o QR Code Pix aparece na tela' : ''}. O pagamento é confirmado assim que recebermos o comprovante.`,
+      cartao: `<strong>Como funciona:</strong> ao finalizar, seu pedido é enviado pelo WhatsApp e você recebe um link seguro para pagar com cartão de crédito. Aceitamos Visa, Mastercard, Amex, Elo e Hipercard.`
+    };
+    function renderPay() {
+      const box = $('#pay-choices');
+      const cur = $('input[name=pagamento]:checked')?.value || 'pix';
+      box.innerHTML = PAY.map(p => `
+        <label class="choice">
+          <input type="radio" name="pagamento" value="${p.id}" ${p.id === cur ? 'checked' : ''} />
+          <div class="choice__box">
+            <div class="choice__title">${p.title}<span class="tag">${p.tag}</span></div>
+            <div class="choice__desc">${p.desc}</div>
+          </div>
+        </label>`).join('');
+      $('#pay-note').innerHTML = PAY_NOTES[cur];
+    }
+    $('#pay-choices').addEventListener('change', renderPay);
+    const payment = () => $('input[name=pagamento]:checked')?.value || 'pix';
+
+    /* ---- Resumo ---- */
+    function renderSummary() {
+      const items = cartItems();
+      const sub = items.reduce((a, i) => a + i.price * i.qty, 0);
+      const ship = needsShipping() ? shipping() : { price: 0 };
+      $('#sum-lines').innerHTML = items.length
+        ? items.map(i => `<div class="sline"><span><b>${i.qty}×</b> ${i.title}</span><span class="v">${brl(i.price * i.qty)}</span></div>`).join('')
+        : `<div class="summary__empty">Seu carrinho está vazio.</div>`;
+      $('#sum-sub').textContent = brl(sub);
+      $('#sum-frete').textContent = !needsShipping() ? 'não se aplica' : ship.price === null ? 'a combinar' : ship.price === 0 ? 'grátis' : brl(ship.price);
+      const total = sub + (ship.price || 0);
+      $('#sum-total').innerHTML = brl(total) + (needsShipping() && ship.price === null ? ' <small>+ frete</small>' : '');
+      $('#submit-btn').disabled = !items.length;
+    }
+
+    function renderAll() {
+      renderItems(); renderShipping(); renderPay(); renderSummary();
+      const showAddr = needsShipping();
+      $('#step-entrega').style.display = showAddr ? '' : 'none';
+      $('#addr-block').style.display = showAddr && shipping().id !== 'retirada' ? '' : 'none';
+    }
+    renderAll();
+
+    /* ---- Máscaras ---- */
+    const mask = (el, fn) => el.addEventListener('input', () => { el.value = fn(el.value); });
+    mask($('#whatsapp'), v => { v = digits(v).slice(0, 11); return v.length > 6 ? v.replace(/^(\d{2})(\d{4,5})(\d{0,4}).*/, '($1) $2-$3') : v.length > 2 ? v.replace(/^(\d{2})(\d*)/, '($1) $2') : v; });
+    mask($('#cpf'), v => digits(v).slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'));
+    mask($('#cep'), v => digits(v).slice(0, 8).replace(/^(\d{5})(\d)/, '$1-$2'));
+    mask($('#uf'), v => v.replace(/[^a-zA-Z]/g, '').toUpperCase().slice(0, 2));
+
+    /* ---- ViaCEP ---- */
+    $('#cep').addEventListener('blur', async () => {
+      const cep = digits($('#cep').value);
+      if (cep.length !== 8) return;
+      try {
+        const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const d = await r.json();
+        if (d.erro) return;
+        if (d.logradouro) $('#rua').value = d.logradouro;
+        if (d.bairro) $('#bairro').value = d.bairro;
+        if (d.localidade) $('#cidade').value = d.localidade;
+        if (d.uf) $('#uf').value = d.uf;
+        $('#numero').focus();
+      } catch (e) { /* segue manual */ }
+    });
+
+    /* ---- Validação ---- */
+    const validCPF = (s) => {
+      const c = digits(s); if (!c) return true;
+      if (c.length !== 11 || /^(\d)\1+$/.test(c)) return false;
+      const calc = (n) => { let sum = 0; for (let i = 0; i < n; i++) sum += +c[i] * (n + 1 - i); const r = (sum * 10) % 11; return r === 10 ? 0 : r; };
+      return calc(9) === +c[9] && calc(10) === +c[10];
+    };
+    function validate() {
+      let ok = true;
+      const set = (id, valid) => { const f = $('#' + id).closest('.field'); f.classList.toggle('invalid', !valid); if (!valid && ok) { ok = false; f.querySelector('input,select').focus(); } };
+      set('nome', $('#nome').value.trim().split(/\s+/).length >= 2);
+      set('whatsapp', digits($('#whatsapp').value).length >= 10);
+      set('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('#email').value.trim()));
+      set('cpf', validCPF($('#cpf').value));
+      if (needsShipping() && shipping().id !== 'retirada') {
+        set('cep', digits($('#cep').value).length === 8);
+        ['rua', 'numero', 'bairro', 'cidade'].forEach(id => set(id, !!$('#' + id).value.trim()));
+        set('uf', $('#uf').value.trim().length === 2);
+      }
+      return ok;
+    }
+    document.querySelectorAll('.field input').forEach(el => el.addEventListener('input', () => el.closest('.field').classList.remove('invalid')));
+
+    /* ---- Pix (BR Code EMV) ---- */
+    const crc16 = (str) => {
+      let crc = 0xFFFF;
+      for (let i = 0; i < str.length; i++) {
+        crc ^= str.charCodeAt(i) << 8;
+        for (let j = 0; j < 8; j++) crc = crc & 0x8000 ? ((crc << 1) ^ 0x1021) & 0xFFFF : (crc << 1) & 0xFFFF;
+      }
+      return crc.toString(16).toUpperCase().padStart(4, '0');
+    };
+    const emv = (id, v) => id + String(v.length).padStart(2, '0') + v;
+    const ascii = (s, n) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z0-9 ]/g, '').toUpperCase().slice(0, n);
+    function pixPayload(amount, txid) {
+      const p =
+        emv('00', '01') +
+        emv('26', emv('00', 'BR.GOV.BCB.PIX') + emv('01', CONFIG.pixKey)) +
+        emv('52', '0000') + emv('53', '986') +
+        emv('54', amount.toFixed(2)) +
+        emv('58', 'BR') +
+        emv('59', ascii(CONFIG.pixName, 25)) +
+        emv('60', ascii(CONFIG.pixCity, 15)) +
+        emv('62', emv('05', txid.replace(/[^A-Za-z0-9]/g, '').slice(0, 25) || '***')) +
+        '6304';
+      return p + crc16(p);
+    }
+    let qrLibLoading = null;
+    const loadQR = () => qrLibLoading || (qrLibLoading = new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+      s.onload = res; s.onerror = rej; document.head.appendChild(s);
+    }));
+
+    /* ---- Finalizar ---- */
+    $('#checkout').addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (!cartItems().length || !validate()) return;
+
+      const items = cartItems();
+      const sub = items.reduce((a, i) => a + i.price * i.qty, 0);
+      const ship = needsShipping() ? shipping() : null;
+      const total = sub + ((ship && ship.price) || 0);
+      const orderId = 'JJ' + Date.now().toString(36).toUpperCase().slice(-6);
+      const pay = payment();
+      const nome = $('#nome').value.trim();
+
+      const endereco = ship && ship.id !== 'retirada'
+        ? `${$('#rua').value.trim()}, ${$('#numero').value.trim()}${$('#comp').value.trim() ? ' – ' + $('#comp').value.trim() : ''}\n${$('#bairro').value.trim()} · ${$('#cidade').value.trim()}/${$('#uf').value.trim().toUpperCase()}\nCEP ${$('#cep').value.trim()}`
+        : null;
+
+      const lines = [
+        `*Novo pedido — Josineia Jesus*`,
+        `Pedido *${orderId}*`,
+        ``,
+        `*Itens*`,
+        ...items.map(i => `• ${i.qty}× ${i.title} — ${brl(i.price * i.qty)}`),
+        ``,
+        `Subtotal: ${brl(sub)}`,
+        ship ? `Frete: ${ship.title}${ship.price === null ? ' (a combinar)' : ship.price === 0 ? ' (grátis)' : ' — ' + brl(ship.price)}` : null,
+        `*Total: ${brl(total)}${ship && ship.price === null ? ' + frete' : ''}*`,
+        ``,
+        `*Cliente*`,
+        `Nome: ${nome}`,
+        `WhatsApp: ${$('#whatsapp').value.trim()}`,
+        `E-mail: ${$('#email').value.trim()}`,
+        $('#cpf').value.trim() ? `CPF: ${$('#cpf').value.trim()}` : null,
+        endereco ? `\n*Entrega*\n${endereco}` : null,
+        ``,
+        `*Pagamento:* ${pay === 'pix' ? 'Pix' + (CONFIG.pixKey ? ' (QR Code gerado no site, comprovante a seguir)' : ' — aguardando chave') : 'Cartão de crédito — aguardando link de pagamento'}`
+      ].filter(l => l !== null);
+
+      const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`;
+      window.open(waUrl, '_blank');
+
+      /* Tela de confirmação */
+      $('#done-id').textContent = `Pedido ${orderId}`;
+      $('#done-wa').href = waUrl;
+      const first = nome.split(/\s+/)[0];
+      if (pay === 'pix') {
+        $('#done-text').textContent = CONFIG.pixKey
+          ? `${first}, seu pedido foi enviado pelo WhatsApp. Pague com o Pix abaixo e envie o comprovante na conversa para confirmarmos o envio.`
+          : `${first}, seu pedido foi enviado pelo WhatsApp. Em instantes você recebe a chave Pix na conversa para concluir o pagamento.`;
+        if (CONFIG.pixKey) {
+          const payload = pixPayload(total, orderId);
+          $('#pix-payload').value = payload;
+          $('#pix-box').hidden = false;
+          try {
+            await loadQR();
+            $('#pix-qr').innerHTML = '';
+            new QRCode($('#pix-qr'), { text: payload, width: 184, height: 184, correctLevel: QRCode.CorrectLevel.M });
+          } catch (e) { $('#pix-qr').style.display = 'none'; }
+        }
+      } else {
+        const link = (items.length === 1 && items[0].qty === 1 && items[0].cardLink) || CONFIG.cardLinkGeneral;
+        $('#done-text').textContent = link
+          ? `${first}, seu pedido foi enviado pelo WhatsApp. Use o botão abaixo para pagar com cartão em ambiente seguro.`
+          : `${first}, seu pedido foi enviado pelo WhatsApp. Em instantes você recebe na conversa o link seguro para pagar com cartão.`;
+        if (link) { $('#done-card').href = link; $('#done-card').hidden = false; }
+      }
+      document.body.classList.add('is-done');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      cart = {}; saveCart();
+    });
+
+    $('#pix-copy').addEventListener('click', async () => {
+      const inp = $('#pix-payload');
+      try { await navigator.clipboard.writeText(inp.value); } catch (e) { inp.select(); document.execCommand('copy'); }
+      const b = $('#pix-copy'); b.textContent = 'Copiado'; setTimeout(() => b.textContent = 'Copiar', 1800);
+    });
+  </script>
+</body>
+</html>
